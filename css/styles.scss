@@ -1,0 +1,176 @@
+﻿$bg-color: #fff;
+$text-color: #000;
+$font-serif: "EB Garamond", serif;
+$font-sans: "Inter", system-ui, sans-serif;
+
+:root {
+  --tip-x: 48px;
+  --tip-y: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  caret-color: transparent;
+}
+
+body {
+  background-image: url('../assets/keys/old-paper.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: $text-color;
+  font-family: $font-serif;
+  line-height: 1.45;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow-x: hidden;
+  * { caret-color: transparent; }
+}
+
+a, button, input, select, textarea, [contenteditable="true"] {
+  caret-color: auto;
+  user-select: auto;
+}
+
+h1, h2 { font-family: $font-serif; }
+small, nav, button { font-family: $font-sans; }
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-inline: clamp(12px, 4vw, 48px);
+}
+
+h1.line { margin-bottom: 0.1rem; }
+h2.line { margin-top: 0; }
+
+.line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+
+  .first-line, .second-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-align: center;
+  }
+
+  .first-line {
+    font-weight: 650;
+    font-size: clamp(1.75rem, 6vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .second-line {
+    font-weight: 400;
+    font-size: clamp(0.9rem, 3vw, 1.5rem);
+    line-height: 1.2;
+    margin-top: 0.25rem;
+    font-style: italic;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.1em;
+    background-color: $text-color;
+    margin-left: 3px;
+    vertical-align: baseline;
+    transform: translateY(15%);
+    animation: js-blink .8s step-end infinite;
+    visibility: hidden;
+    &.is-visible { visibility: visible; }
+  }
+}
+
+@keyframes js-blink { 50% { opacity: 0; } }
+
+.no-caret, .no-caret * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+}
+
+.image-gallery {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  min-height: 100px;
+
+  .gallery-img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    &.is-visible { opacity: 1; }
+  }
+}
+
+// 🔵 CURSOR DE ESCRITORIO FLUIDO
+#cursor-follow {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9999;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));
+  display: block; 
+  // Volvemos a la proporción editorial perfecta
+  width: 96px; 
+  height: 96px;
+  object-fit: contain;
+}
+
+@media (pointer: fine) and (hover: hover) {
+  body { cursor: none; }
+}
+
+// 🔵 REFINAMIENTO MÓVIL (Celulares y Tablets en vertical)
+@media (max-width: 768px), (pointer: coarse) {
+  body { cursor: auto; } 
+
+  // Quitamos los márgenes negativos agresivos y los dejamos en 0 absoluto
+  h1.line { margin-bottom: 0 !important; } 
+  h2.line { margin-top: 0 !important; }
+  .second-line { margin-top: 0 !important; }
+
+  h1.line .cursor {
+    height: 1.5rem; 
+    width: 2px;     
+    transform: translateY(5%);
+  }
+
+  h2.line .cursor {
+    height: 1rem;   
+    width: 2px;
+    transform: translateY(10%);
+  }
+
+  #cursor-follow {
+    display: none !important; 
+  }
+
+  .image-gallery {
+    display: flex !important; 
+    margin-top: 0 !important; 
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem) !important;
+    min-height: clamp(64px, 12vw, 100px); 
+    
+    .gallery-img {
+      width: clamp(60px, 12vw, 96px);  
+      height: clamp(60px, 12vw, 96px);
+    }
+  }
+}
