@@ -11,6 +11,7 @@ A bespoke, high-performance app architecture designed with a post-punk, editoria
 * **Logic:** Vanilla JavaScript (ES6+) for high-performance DOM manipulation
 * **Testing:** Playwright E2E (End-to-End) for cross-browser validation
 * **Asset Management:** Custom SVG/PNG sprite logic for hardware-aware interactions
+* **Containerization:** Docker (Standardized engineering environment)
 
 ---
 
@@ -50,6 +51,16 @@ For an interaction-heavy app where UX and UI logic are deeply intertwined, I int
 
 * **Asset Integrity & SEO:**
 Every asset, including the custom **Favicon** (the 'M' typewriter key), was selected to reinforce the editorial brand while maintaining a clean, 404-free network log.
+
+---
+
+## 🐳 Containerization & Environment Parity
+
+This app is fully containerized using a specialized **Playwright base image** to ensure **Environment Parity**.
+
+* **Standardized Sandbox:** Pre-configures all Linux-level dependencies for Webkit and Chromium.
+* **Layer Caching:** The Dockerfile is optimized to separate dependency installation from source code, resulting in faster build times.
+* **Portability:** The entire interaction suite and dev environment can be spun up without local Node/PNPM installations.
 
 ---
 
