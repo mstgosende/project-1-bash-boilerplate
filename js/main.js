@@ -3,6 +3,8 @@ const JS_TEXT_LINE_TWO   = "And this is my step 1 on becoming a Software Enginee
 const JS_TYPING_SPEED_MS = 70;
 const JS_DELAY_BETWEEN_LINES_MS = 800;
 
+window.JSTypingState = { line1Done: false, line2Done: false };
+
 const JSTextLineOneEl = document.getElementById("text1");
 const JSTextLineTwoEl = document.getElementById("text2");
 const JSCursorOneEl   = document.getElementById("cursor1");
@@ -63,7 +65,8 @@ function JSHideCursor(el)  { if (el) el.classList.remove("is-visible"); }
 (function JSImageArchitecture() {
 
     if (JSCursorFollow) {
-        // EL TAMAÑO AHORA ES DINÁMICO Y SE CONTROLA DESDE SASS
+        JSCursorFollow.style.width = "96px";
+        JSCursorFollow.style.height = "96px";
 
         imageFrames.forEach(f => { const i = new Image(); i.src = f.src; });
 
